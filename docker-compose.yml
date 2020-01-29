@@ -1,0 +1,110 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: traefik:v2.0.2
+    command:
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=pib-net"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - 80:80
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - pib-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  helloworld:
+    image: tutum/hello-world:latest
+    networks:
+     - pib-net
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.helloworld.rule=Host(`helloworld.walkpib.pp-intern.tools`)"
+        - "traefik.http.routers.helloworld.entrypoints=web"
+        - "traefik.http.services.helloworld.loadbalancer.server.port=80"
+  imposition:
+    image: perfectpattern/imposition-service:build-4
+    networks:
+     - pib-net
+    environment:
+      - SHEET_BLEED_MM=0
+      - HIDE_LABELS=false
+      - BOX_MARK_TO_FINAL_TRIM_THRESHOLD=2000
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.imposition.rule=Host(`imposition.walkpib.pp-intern.tools`)"
+        - "traefik.http.routers.imposition.entrypoints=web"
+        - "traefik.http.services.imposition.loadbalancer.server.port=4200"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+    volumes:
+      - /mnt/files/storage:/data
+    ports:
+      - "4200:4200"
+  logshipper:
+    image: perfectpattern/log-shipper-service:build-2
+    networks:
+      - pib-net
+    environment:
+      - SITE_CODE=<REPLACE>
+      - PROFILE=<REPLACE>
+      - ELASTIC_SEARCH_USER=<REPLACE>
+      - ELASTIC_SEARCH_PWD=<REPLACE>
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 20s
+        order: stop-first
+    ports:
+      - "24224:24224"
+  flow:
+    image: perfectpattern/flow-service:build-9
+    networks:
+      - pib-net
+    environment:
+      - SPO_URL=<REPLACE>
+      - SPO_TENANT=<REPLACE>
+      - SPO_USER=<REPLACE>
+      - SPO_PASSWORD=<REPLACE>
+      - SPO_WORKSPACE_ID=<REPLACE>
+      - INTEGRATION_NAME=<REPLACE>
+      - INTEGRATION_LOCATION=<REPLACE>
+      - IMPOSITION_URL=http://imposition:4200
+    logging:
+      driver: fluentd
+      options:
+        tag: "{{.Name}}.{{.ID}}.{{.ImageName}}"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.flow.rule=Host(`flow.walkpib.pp-intern.tools`)"
+        - "traefik.http.routers.flow.entrypoints=web"
+        - "traefik.http.services.flow.loadbalancer.server.port=1881"
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: stop-first
+    volumes:
+      - /mnt/files/integration:/opt/custom-integration
+      - /mnt/files/in:/data/in
+      - /mnt/files/out:/data/out
+      - /mnt/files/storage:/data/storage
+    ports:
+      - "1881:1881"
+networks:
+  pib-net:
+    external: true
