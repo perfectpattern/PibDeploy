@@ -107,7 +107,6 @@ if [[ -z "$epwd" ]]; then
 else
    # remove both leading and trailing spaces 
    epwd="$(echo -e "${epwd}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-   u="$(echo -e "${u}" | sed -e 's///\//')"
 fi
 
 echo ""
