@@ -27,7 +27,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.helloworld.rule=Host(`helloworld.walkpib.pp-intern.tools`)"
+        - "traefik.http.routers.helloworld.rule=Host(`helloworld.pib`)"
         - "traefik.http.routers.helloworld.entrypoints=web"
         - "traefik.http.services.helloworld.loadbalancer.server.port=80"
   imposition:
@@ -41,7 +41,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.imposition.rule=Host(`imposition.walkpib.pp-intern.tools`)"
+        - "traefik.http.routers.imposition.rule=Host(`imposition.pib`)"
         - "traefik.http.routers.imposition.entrypoints=web"
         - "traefik.http.services.imposition.loadbalancer.server.port=4200"
       replicas: 1
@@ -90,7 +90,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.flow.rule=Host(`flow.walkpib.pp-intern.tools`)"
+        - "traefik.http.routers.flow.rule=Host(`flow.pib`)"
         - "traefik.http.routers.flow.entrypoints=web"
         - "traefik.http.services.flow.loadbalancer.server.port=1881"
       replicas: 1
