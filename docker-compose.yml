@@ -71,7 +71,7 @@ services:
     ports:
       - "24224:24224"
   flow:
-    image: perfectpattern/flow-service:build-11
+    image: perfectpattern/flow-service:build-13
     networks:
       - pib-net
     environment:
@@ -81,7 +81,7 @@ services:
       - SPO_PASSWORD=<REPLACE>
       - SPO_WORKSPACE_ID=<REPLACE>
       - INTEGRATION_NAME=<REPLACE>
-      - INTEGRATION_LOCATION=<REPLACE>
+      - INTEGRATION_LOCATION=/opt/custom-integration
       - IMPOSITION_URL=http://imposition:4200
     logging:
       driver: fluentd

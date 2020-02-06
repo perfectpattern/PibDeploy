@@ -63,15 +63,15 @@ else
    # remove both leading and trailing spaces 
    sin="$(echo -e "${sin}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
 fi
-echo "SPO Integration Location:"
-read sil
-if [[ -z "$sil" ]]; then
-   echo "No input detected! Please re-run the script and do not enter an empty string."
-   exit 1
-else
-   # remove both leading and trailing spaces 
-   sil="$(echo -e "${sil}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-fi
+#echo "SPO Integration Location:"
+#read sil
+#if [[ -z "$sil" ]]; then
+#   echo "No input detected! Please re-run the script and do not enter an empty string."
+#   exit 1
+#else
+#   # remove both leading and trailing spaces 
+#   sil="$(echo -e "${sil}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+#fi
 echo "Site Code:"
 read sitecode
 if [[ -z "$sitecode" ]]; then
@@ -125,8 +125,8 @@ echo -n "SPO Workspace ID: "
 echo $swsid
 echo -n "SPO Integration Name: "
 echo $sin
-echo -n "SPO Integration Location: "
-echo $sil
+#echo -n "SPO Integration Location: "
+#echo $sil
 echo -n "Site Code: "
 echo $sitecode
 echo -n "Profile: "
@@ -153,7 +153,7 @@ sed -i 's,SPO_USER=<REPLACE>,SPO_USER='"$suser"',g' ~/docker-compose-run.yml || 
 sed -i 's,SPO_PASSWORD=<REPLACE>,SPO_PASSWORD='"$spwd"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_PASSWORD variable in new YAML file!' ; exit 1; }
 sed -i 's,SPO_WORKSPACE_ID=<REPLACE>,SPO_WORKSPACE_ID='"$swsid"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_WORKSPACE_ID variable in new YAML file!' ; exit 1; }
 sed -i 's,INTEGRATION_NAME=<REPLACE>,INTEGRATION_NAME='"$sin"',g' ~/docker-compose-run.yml || { echo 'Failed to set INTEGRATION_NAME variable in new YAML file!' ; exit 1; }
-sed -i 's,INTEGRATION_LOCATION=<REPLACE>,INTEGRATION_LOCATION='"$sil"',g' ~/docker-compose-run.yml || { echo 'Failed to set INTEGRATION_LOCATION variable in new YAML file!' ; exit 1; }
+#sed -i 's,INTEGRATION_LOCATION=<REPLACE>,INTEGRATION_LOCATION='"$sil"',g' ~/docker-compose-run.yml || { echo 'Failed to set INTEGRATION_LOCATION variable in new YAML file!' ; exit 1; }
 sed -i 's,SITE_CODE=<REPLACE>,SITE_CODE='"$sitecode"',g' ~/docker-compose-run.yml || { echo 'Failed to set SITE_CODE variable in new YAML file!' ; exit 1; }
 sed -i 's,PROFILE=<REPLACE>,PROFILE='"$profile"',g' ~/docker-compose-run.yml || { echo 'Failed to set PROFILE variable in new YAML file!' ; exit 1; }
 sed -i 's,ELASTIC_SEARCH_USER=<REPLACE>,ELASTIC_SEARCH_USER='"$euser"',g' ~/docker-compose-run.yml || { echo 'Failed to set ELASTIC_SEARCH_USER variable in new YAML file!' ; exit 1; }
