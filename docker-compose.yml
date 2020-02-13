@@ -73,7 +73,7 @@ services:
     ports:
       - "24224:24224"
   flow:
-    image: perfectpattern/flow-service:build-13
+    image: perfectpattern/flow-service:build-14
     networks:
       - pib-net
     environment:
