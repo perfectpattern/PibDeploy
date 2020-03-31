@@ -1,4 +1,4 @@
-# YAML Version: v1.0.7
+# YAML Version: v1.0.8
 
 version: '3.7'
 
@@ -23,7 +23,7 @@ services:
         constraints:
           - node.role == manager
   helloworld:
-    image: perfectpattern/hello-world-webservice:v1.0.0
+    image: perfectpattern/hello-world-webservice:v1.0.1
     networks:
      - pib-net
     deploy:
@@ -82,7 +82,7 @@ services:
       - SPO_USER=<REPLACE>
       - SPO_PASSWORD=<REPLACE>
       - SPO_WORKSPACE_ID=<REPLACE>
-      - INTEGRATION_NAME=<REPLACE>
+      - INTEGRATION_NAME=default-pdf-integration
       - INTEGRATION_LOCATION=/opt/custom-integration
       - IMPOSITION_URL=http://imposition:4200
     logging:
