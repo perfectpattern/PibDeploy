@@ -141,23 +141,23 @@ echo "If there is anything incorrect, please re-run this script."
 echo ""
 
 # Create new yml file
-newymlfile=~/docker-compose-run.yml
+newymlfile=~/docker-compose-edit.yml
 rm -f $newymlfile
 cp ~/docker-compose.yml $newymlfile || { echo "Failed to create new YAML file!" ; exit 1; }
 echo "A new YAML file was created"
 
 # Put variables in place
-sed -i 's,SPO_URL=<REPLACE>,SPO_URL='"$surl"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_URL variable in new YAML file!' ; exit 1; }
-sed -i 's,SPO_TENANT=<REPLACE>,SPO_TENANT='"$stenant"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_TENANT variable in new YAML file!' ; exit 1; }
-sed -i 's,SPO_USER=<REPLACE>,SPO_USER='"$suser"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_USER variable in new YAML file!' ; exit 1; }
-sed -i 's,SPO_PASSWORD=<REPLACE>,SPO_PASSWORD='"$spwd"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_PASSWORD variable in new YAML file!' ; exit 1; }
-sed -i 's,SPO_WORKSPACE_ID=<REPLACE>,SPO_WORKSPACE_ID='"$swsid"',g' ~/docker-compose-run.yml || { echo 'Failed to set SPO_WORKSPACE_ID variable in new YAML file!' ; exit 1; }
-#sed -i 's,INTEGRATION_NAME=<REPLACE>,INTEGRATION_NAME='"$sin"',g' ~/docker-compose-run.yml || { echo 'Failed to set INTEGRATION_NAME variable in new YAML file!' ; exit 1; }
-#sed -i 's,INTEGRATION_LOCATION=<REPLACE>,INTEGRATION_LOCATION='"$sil"',g' ~/docker-compose-run.yml || { echo 'Failed to set INTEGRATION_LOCATION variable in new YAML file!' ; exit 1; }
-sed -i 's,SITE_CODE=<REPLACE>,SITE_CODE='"$sitecode"',g' ~/docker-compose-run.yml || { echo 'Failed to set SITE_CODE variable in new YAML file!' ; exit 1; }
-sed -i 's,PROFILE=<REPLACE>,PROFILE='"$profile"',g' ~/docker-compose-run.yml || { echo 'Failed to set PROFILE variable in new YAML file!' ; exit 1; }
-sed -i 's,ELASTIC_SEARCH_USER=<REPLACE>,ELASTIC_SEARCH_USER='"$euser"',g' ~/docker-compose-run.yml || { echo 'Failed to set ELASTIC_SEARCH_USER variable in new YAML file!' ; exit 1; }
-sed -i 's,ELASTIC_SEARCH_PWD=<REPLACE>,ELASTIC_SEARCH_PWD='"$epwd"',g' ~/docker-compose-run.yml || { echo 'Failed to set ELASTIC_SEARCH_PWD variable in new YAML file!' ; exit 1; }
+sed -i 's,SPO_URL=<REPLACE>,SPO_URL='"$surl"',g' ~/docker-compose-edit.yml || { echo 'Failed to set SPO_URL variable in new YAML file!' ; exit 1; }
+sed -i 's,SPO_TENANT=<REPLACE>,SPO_TENANT='"$stenant"',g' ~/docker-compose-edit.yml || { echo 'Failed to set SPO_TENANT variable in new YAML file!' ; exit 1; }
+sed -i 's,SPO_USER=<REPLACE>,SPO_USER='"$suser"',g' ~/docker-compose-edit.yml || { echo 'Failed to set SPO_USER variable in new YAML file!' ; exit 1; }
+sed -i 's,SPO_PASSWORD=<REPLACE>,SPO_PASSWORD='"$spwd"',g' ~/docker-compose-edit.yml || { echo 'Failed to set SPO_PASSWORD variable in new YAML file!' ; exit 1; }
+sed -i 's,SPO_WORKSPACE_ID=<REPLACE>,SPO_WORKSPACE_ID='"$swsid"',g' ~/docker-compose-edit.yml || { echo 'Failed to set SPO_WORKSPACE_ID variable in new YAML file!' ; exit 1; }
+#sed -i 's,INTEGRATION_NAME=<REPLACE>,INTEGRATION_NAME='"$sin"',g' ~/docker-compose-edit.yml || { echo 'Failed to set INTEGRATION_NAME variable in new YAML file!' ; exit 1; }
+#sed -i 's,INTEGRATION_LOCATION=<REPLACE>,INTEGRATION_LOCATION='"$sil"',g' ~/docker-compose-edit.yml || { echo 'Failed to set INTEGRATION_LOCATION variable in new YAML file!' ; exit 1; }
+sed -i 's,SITE_CODE=<REPLACE>,SITE_CODE='"$sitecode"',g' ~/docker-compose-edit.yml || { echo 'Failed to set SITE_CODE variable in new YAML file!' ; exit 1; }
+sed -i 's,PROFILE=<REPLACE>,PROFILE='"$profile"',g' ~/docker-compose-edit.yml || { echo 'Failed to set PROFILE variable in new YAML file!' ; exit 1; }
+sed -i 's,ELASTIC_SEARCH_USER=<REPLACE>,ELASTIC_SEARCH_USER='"$euser"',g' ~/docker-compose-edit.yml || { echo 'Failed to set ELASTIC_SEARCH_USER variable in new YAML file!' ; exit 1; }
+sed -i 's,ELASTIC_SEARCH_PWD=<REPLACE>,ELASTIC_SEARCH_PWD='"$epwd"',g' ~/docker-compose-edit.yml || { echo 'Failed to set ELASTIC_SEARCH_PWD variable in new YAML file!' ; exit 1; }
 
 echo "Variables were successfully changed in new YAML file"
 
