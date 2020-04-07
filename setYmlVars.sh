@@ -140,7 +140,7 @@ echo ""
 echo "If there is anything incorrect, please re-run this script."
 echo ""
 
-# Create new yml file
+# Create new edit yml file
 newymlfile=~/docker-compose-edit.yml
 rm -f $newymlfile
 cp ~/docker-compose.yml $newymlfile || { echo "Failed to create new YAML file!" ; exit 1; }
