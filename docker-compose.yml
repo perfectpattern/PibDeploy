@@ -1,4 +1,4 @@
-# YAML Version: v1.0.9
+# YAML Version: v1.0.10
 
 version: '3.7'
 
@@ -104,7 +104,7 @@ services:
       - /mnt/files/integration:/opt/custom-integration
       - /mnt/files/in:/data/in
       - /mnt/files/out:/data/out
-      - /mnt/files/storage:/data
+      - /mnt/files/storage:/data/storage
     ports:
       - "1881:1881"
 networks:
